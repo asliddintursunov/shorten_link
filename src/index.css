@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 5px grey;  */
+  border-radius: 8px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: darkgray;
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: gray;
+}
+@layer components {
+  .text-gradient {
+    background: linear-gradient(
+      90deg,
+      rgb(77, 121, 255) 0%,
+      rgb(236, 10, 236) 100%,
+      rgb(93, 134, 255) 0%
+    );
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+@layer components {
+  .result-gradient {
+    background: linear-gradient(
+      90deg,
+      rgb(254, 233, 95) 0%,
+      rgb(255, 132, 31) 100%
+    );
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+.copy-btn:hover ~ .copy-info {
+  opacity: 1;
+}
+.copy-info { 
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
