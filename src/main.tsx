@@ -7,7 +7,7 @@ import Footer from "./components/Footer.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <main className="max-w-[1440px] mx-4">
+    <main className="max-w-[1440px] mx-auto">
       <Navbar />
       <App />
       <Footer />
