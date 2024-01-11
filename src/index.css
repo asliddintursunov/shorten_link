@@ -49,6 +49,17 @@
     -webkit-text-fill-color: transparent;
   }
 }
+@layer components {
+  .error-gradient {
+    background: linear-gradient(
+      90deg,
+      rgb(251, 107, 107) 0%,
+      rgb(255, 0, 0) 100%
+    );
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
 .copy-btn:hover ~ .copy-info {
   opacity: 1;
 }

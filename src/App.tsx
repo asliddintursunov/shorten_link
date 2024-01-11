@@ -9,10 +9,11 @@ function App() {
   const [isPending, setIsPending] = useState<boolean | null>(null);
   const [result, setResult] = useState<string>("");
   const [copy, setCopy] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
   const handleSubmit = function (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(url);
+    setError(false);
 
     setIsPending(true);
     axios
@@ -20,19 +21,18 @@ function App() {
         url: url,
       })
       .then((res) => {
-        console.log(res);
         setIsPending(false);
         setResult(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        setError(true);
+        setResult(err.response.data);
         setIsPending(false);
       });
   };
 
   const copyUrl = function () {
     if (result !== "") {
-      console.log(result);
       const el = document.createElement("textarea");
       el.value = result;
       document.body.appendChild(el);
@@ -79,16 +79,23 @@ function App() {
       </form>
       {isPending === false && (
         <div className="flex flex-col gap-2 max-w-[425px] md:mx-auto mx-2">
-          <p className="text-lg md:text-xl font-bold result-gradient">
-            Result:{" "}
-            <a
-              href={result}
-              className="font-medium text-sm md:text-[16px] cursor-pointer hover:underline hover:decoration-orange-300"
-              target="_blank"
-            >
+          {!error && (
+            <p className="text-lg md:text-xl font-bold result-gradient">
+              Result:{" "}
+              <a
+                href={result}
+                className="font-medium text-sm md:text-[16px] cursor-pointer hover:underline hover:decoration-orange-300"
+                target="_blank"
+              >
+                {result}
+              </a>
+            </p>
+          )}
+          {error && (
+            <p className="text-lg md:text-xl font-bold error-gradient">
               {result}
-            </a>
-          </p>
+            </p>
+          )}
           {copy && (
             <>
               <button className="btn text-xl md:text-2xl select-none cursor-pointer active:text-lg md:active:text-xl transition-all copy-btn">
